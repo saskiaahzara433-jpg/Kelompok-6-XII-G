@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamur Crispy Kel 6 XII-G - Website Resmi</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Font Inter dan Warna Dasar -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7; /* Latar belakang abu-abu muda */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header & Navigation -->
+    <header class="bg-red-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">
+                Jamur Crispy Kel 6 XII-G
+            </h1>
+            <nav>
+                <button onclick="showPage('home')" class="nav-btn p-2 rounded-lg hover:bg-red-700 transition duration-150 active-page" data-page="home">Home</button>
+                <button onclick="showPage('menu')" class="nav-btn p-2 rounded-lg hover:bg-red-700 transition duration-150" data-page="menu">Menu</button>
+                <button onclick="showPage('checkout')" class="nav-btn p-2 rounded-lg hover:bg-red-700 transition duration-150 relative" data-page="checkout">
+                    Checkout
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-400 text-red-900 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition duration-300">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-4xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+
+        <!-- Halaman 1: HOME -->
+        <section id="home" class="page-section space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl border-t-4 border-red-600">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Apa Itu Jamur Crispy?</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Jamur Crispy adalah camilan renyah revolusioner yang dibuat dari jamur tiram segar pilihan. Jamur ini dibalut dengan adonan tepung berbumbu rahasia dan digoreng hingga mencapai tekstur yang sangat renyah dan berwarna keemasan. Bukan hanya lezat, ini adalah alternatif camilan yang lebih sehat dan kaya nutrisi.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-xl">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Asal Usul Jamur Crispy</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Popularitas Jamur Crispy bermula dari inovasi kuliner lokal di Indonesia. Jamur tiram, yang awalnya hanya diolah menjadi sayur, kini bertransformasi menjadi camilan yang disukai semua kalangan. Kami, Kelompok 6 XII-G, membawa inovasi ini dengan sentuhan rasa unik yang dijamin bikin ketagihan, memanfaatkan melimpahnya jamur tiram lokal berkualitas tinggi.
+                </p>
+            </div>
+
+            <div class="bg-yellow-100 p-6 sm:p-8 rounded-xl shadow-xl text-center border-b-4 border-yellow-500">
+                <p class="text-2xl sm:text-3xl font-extrabold text-red-700 mb-4">
+                    Kriuknya Bikin Bahagia, Rasanya Bikin Nagih!
+                </p>
+                <p class="text-xl text-gray-700 mb-6">
+                    Jangan cuma lihat, yuk rasakan sensasi renyah dan gurih Jamur Crispy favoritmu sekarang juga!
+                </p>
+                <button onclick="showPage('menu')" class="bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transform hover:scale-105 transition duration-300">
+                    Lihat Pilihan Rasa Kami →
+                </button>
+            </div>
+        </section>
+
+        <!-- Halaman 2: MENU -->
+        <section id="menu" class="page-section hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Menu Pilihan Rasa Jamur Crispy</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Data Jamur Crispy -->
+                <div class="product-card" data-id="1" data-name="Balado" data-price="5000" data-img="https://iili.io/fIt0sK7.jpg"></div>
+                <div class="product-card" data-id="2" data-name="Jagung Bakar" data-price="5000" data-img="https://iili.io/fIt1Sg1.jpg"></div>
+                <div class="product-card" data-id="3" data-name="Keju Asin" data-price="5000" data-img="https://iili.io/fItwX72.jpg"></div>
+            </div>
+        </section>
+
+        <!-- Halaman 3: CHECKOUT -->
+        <section id="checkout" class="page-section hidden">
+            <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">Keranjang Belanja & Checkout</h2>
+
+            <div id="cart-list" class="bg-white p-4 sm:p-6 rounded-xl shadow-xl min-h-32 mb-8">
+                <!-- Cart items will be inserted here -->
+                <p class="text-center text-gray-500 italic" id="empty-cart-msg">Keranjang Anda masih kosong. Yuk, tambahkan jamur crispy!</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-red-100 p-4 rounded-xl shadow-md mb-8">
+                <p class="text-xl font-semibold text-gray-700">Total Harga:</p>
+                <p id="cart-total" class="text-3xl font-extrabold text-red-600 mt-2 sm:mt-0">Rp 0</p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Pilih Metode Pembayaran/Pemesanan</h3>
+            <div class="space-y-4">
+                <!-- Metode 1: DANA -->
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border-l-4 border-green-500">
+                    <h4 class="text-xl font-bold text-green-700 mb-2">1. Pembayaran via DANA</h4>
+                    <p class="text-gray-600 mb-4">Transfer sejumlah <span id="dana-amount" class="font-bold text-lg text-red-600">Rp 0</span> ke nomor DANA kami:</p>
+                    
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span id="dana-number" class="text-2xl font-mono bg-white p-2 rounded-lg border border-green-300">089514461076</span>
+                        <button onclick="copyToClipboard('089514461076', 'DANA')" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-200 text-sm font-semibold">
+                            Copy No. DANA
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-gray-500">
+                        Setelah transfer, segera konfirmasi pesanan dan bukti transfer Anda melalui WhatsApp.
+                    </p>
+                </div>
+
+                <!-- Metode 2: WhatsApp -->
+                <div class="bg-blue-50 p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+                    <h4 class="text-xl font-bold text-blue-700 mb-2">2. Pemesanan via WhatsApp</h4>
+                    <p class="text-gray-600 mb-4">Otomatis kirim detail pesanan ke WhatsApp kami (Cocok untuk COD/Bayar di Tempat).</p>
+                    <button onclick="sendOrderViaWhatsapp()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.5 4.3C18.9 2.7 16.7 1.8 14.3 1.8C9 1.8 4.7 6.1 4.7 11.4C4.7 13.1 5.2 14.8 6.1 16.3L4.9 19.8L8.6 18.6C10.1 19.4 11.7 19.8 13.4 19.8H13.5C18.8 19.8 23.1 15.5 23.1 10.2C23.1 7.8 22.2 5.6 20.6 4.3H20.5ZM13.5 17.8C12 17.8 10.6 17.5 9.3 16.8L9 16.6L5.8 17.7L6.9 14.5L6.7 14.2C6 12.9 5.6 11.6 5.6 10.1C5.6 6.6 8.4 3.8 11.8 3.8C13.5 3.8 15.1 4.5 16.4 5.8C17.7 7 18.4 8.6 18.4 10.3C18.4 13.7 15.6 16.5 12.1 16.5H12Z" />
+                        </svg>
+                        Pesan via WhatsApp Sekarang
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Message Box (Instead of Alert) -->
+            <div id="message-box" class="fixed top-5 right-5 z-[100] bg-gray-800 text-white p-4 rounded-lg shadow-xl hidden transition duration-300 opacity-0 transform translate-x-10">
+                <p id="message-text"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p class="text-sm">&copy; 2024 Jamur Crispy Kel 6 XII-G. Dibuat dengan ❤ oleh Kelompok 6.</p>
+    </footer>
+
+    <script>
+        // Data Produk
+        const PRODUCTS = [
+            { id: 1, name: "Jamur Crispy Rasa Balado", price: 5000, img: "https://iili.io/fIt0sK7.jpg" },
+            { id: 2, name: "Jamur Crispy Rasa Jagung Bakar", price: 5000, img: "https://iili.io/fIt1Sg1.jpg" },
+            { id: 3, name: "Jamur Crispy Rasa Keju Asin", price: 5000, img: "https://iili.io/fItwX72.jpg" },
+        ];
+
+        let cart = []; // Format: { id: 1, name: '...', price: 5000, qty: 1 }
+
+        // --- Utility Functions ---
+
+        /**
+         * Menampilkan pesan notifikasi ke pengguna (menggantikan alert()).
+         * @param {string} message 
+         */
+        function showMessage(message) {
+            const msgBox = document.getElementById('message-box');
+            document.getElementById('message-text').textContent = message;
+            
+            // Show the box with animation
+            msgBox.classList.remove('hidden', 'opacity-0', 'translate-x-10');
+            msgBox.classList.add('opacity-100', 'translate-x-0');
+
+            // Hide the box after 3 seconds with animation
+            setTimeout(() => {
+                msgBox.classList.remove('opacity-100', 'translate-x-0');
+                msgBox.classList.add('opacity-0', 'translate-x-10');
+                setTimeout(() => {
+                    msgBox.classList.add('hidden');
+                }, 300); // Wait for transition to finish
+            }, 3000);
+        }
+
+        /**
+         * Mengubah angka menjadi format mata uang Rupiah.
+         * @param {number} number 
+         * @returns {string}
+         */
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        /**
+         * Mengubah halaman yang terlihat
+         * @param {string} pageId 
+         */
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // Update active navigation button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active-page', 'bg-red-700');
+                if (btn.getAttribute('data-page') === pageId) {
+                    btn.classList.add('active-page', 'bg-red-700');
+                }
+            });
+
+            // Re-render cart if navigating to checkout
+            if (pageId === 'checkout') {
+                renderCart();
+            }
+        }
+
+        // --- Product & Cart Logic ---
+
+        /**
+         * Menambahkan produk ke keranjang
+         * @param {number} productId 
+         */
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    qty: 1
+                });
+            }
+
+            updateCartDisplay();
+            showMessage(`"${product.name}" ditambahkan ke keranjang!`);
+        }
+
+        /**
+         * Merender produk ke halaman Menu
+         */
+        function renderProducts() {
+            const menuContainer = document.querySelector('#menu .grid');
+            if (!menuContainer) return;
+
+            menuContainer.innerHTML = PRODUCTS.map(product => `
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover rounded-t-xl" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e5e5e5/3f3f3f?text=Jamur+Crispy+Gbr';"/>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${product.name}</h3>
+                        <p class="text-3xl font-extrabold text-red-600 mb-4">${formatRupiah(product.price)}</p>
+                        <button onclick="addToCart(${product.id})" class="w-full bg-yellow-500 text-red-900 font-bold py-3 rounded-xl shadow-md hover:bg-yellow-400 transition duration-200 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Tambahkan ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Mengupdate tampilan keranjang (di Checkout dan ikon notifikasi)
+         */
+        function updateCartDisplay() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            // Update cart count icon
+            const cartCountElement = document.getElementById('cart-count');
+            cartCountElement.textContent = totalItems;
+            if (totalItems > 0) {
+                cartCountElement.classList.remove('opacity-0');
+            } else {
+                cartCountElement.classList.add('opacity-0');
+            }
+
+            // Update Checkout totals
+            document.getElementById('cart-total').textContent = formatRupiah(totalAmount);
+            document.getElementById('dana-amount').textContent = formatRupiah(totalAmount);
+        }
+
+        /**
+         * Merender item di halaman Checkout
+         */
+        function renderCart() {
+            const cartList = document.getElementById('cart-list');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `<p class="text-center text-gray-500 italic" id="empty-cart-msg">Keranjang Anda masih kosong. Yuk, tambahkan jamur crispy!</p>`;
+                document.getElementById('cart-total').textContent = formatRupiah(0);
+                document.getElementById('dana-amount').textContent = formatRupiah(0);
+                return;
+            }
+
+            const htmlContent = cart.map(item => `
+                <div class="flex items-center justify-between py-3 border-b last:border-b-0">
+                    <div class="flex-grow">
+                        <p class="text-lg font-semibold text-gray-800">${item.name}</p>
+                        <p class="text-sm text-gray-500">${formatRupiah(item.price)} x ${item.qty} = <span class="font-bold text-red-500">${formatRupiah(item.price * item.qty)}</span></p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="updateQty(${item.id}, -1)" class="w-8 h-8 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition duration-150 font-bold text-xl">-</button>
+                        <span class="w-8 text-center font-bold">${item.qty}</span>
+                        <button onclick="updateQty(${item.id}, 1)" class="w-8 h-8 bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-150 font-bold text-xl">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            cartList.innerHTML = htmlContent;
+            document.getElementById('cart-total').textContent = formatRupiah(totalAmount);
+            document.getElementById('dana-amount').textContent = formatRupiah(totalAmount);
+        }
+
+        /**
+         * Mengupdate kuantitas item di keranjang
+         * @param {number} productId 
+         * @param {number} delta 
+         */
+        function updateQty(productId, delta) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex !== -1) {
+                cart[itemIndex].qty += delta;
+
+                if (cart[itemIndex].qty <= 0) {
+                    // Remove item if quantity is zero or less
+                    cart.splice(itemIndex, 1);
+                }
+                
+                updateCartDisplay();
+                renderCart(); // Re-render the checkout list
+            }
+        }
+
+        // --- Payment/Order Functions ---
+
+        /**
+         * Menyalin teks ke clipboard
+         * @param {string} text 
+         * @param {string} type 
+         */
+        function copyToClipboard(text, type) {
+            // Using execCommand for better compatibility in iframe environments
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showMessage(`${type} berhasil disalin! Segera lakukan pembayaran.`);
+        }
+
+        /**
+         * Membuat link WhatsApp dengan detail pesanan
+         */
+        function sendOrderViaWhatsapp() {
+            if (cart.length === 0) {
+                showMessage("Keranjang kosong. Tidak bisa mengirim pesanan.");
+                return;
+            }
+
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            let message = "Halo Kelompok 6 XII-G, saya ingin memesan Jamur Crispy:\n\n";
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} (${formatRupiah(item.price)}) x ${item.qty} = ${formatRupiah(item.price * item.qty)}\n`;
+            });
+
+            message += `\n------------------------\n`;
+            message += `TOTAL BELANJA: ${formatRupiah(totalAmount)}\n`;
+            message += `\nMohon konfirmasi pesanan saya. Terima kasih!`;
+            
+            const whatsappNumber = '6289514461076'; // Ganti 0 menjadi kode negara 62
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappURL, '_blank');
+        }
+
+        // --- Initialization ---
+
+        window.onload = function() {
+            renderProducts();
+            updateCartDisplay();
+            showPage('home'); // Tampilkan halaman home saat pertama kali dimuat
+        };
+    </script>
+</body>
+</html>

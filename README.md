@@ -1,1 +1,0 @@
-# Kelompok-6-XII-G
